@@ -71,6 +71,11 @@ app.get(`/api/:endpoint/:id`, async (req, res, next) => {
     }
 })
 
+// app.post('/api/:endpoint', async (req, res, next) => {
+//     try {
+//         const { endpoint } = req.params
+//     }
+// })
 
 
 app.use((req,res,next) => {
