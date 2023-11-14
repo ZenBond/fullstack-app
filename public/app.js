@@ -16,6 +16,9 @@ const allTeams = document.querySelector('#all-teams-box')
 const allPlayers = document.querySelector('#all-players-box')
 const playerIndexBox = document.querySelector('#player-index-box')
 const teamIndexBox = document.querySelector('#team-index-box')
+const deletePlayerBox = document.querySelector('#delete-player-box')
+const deleteTeamBox = document.querySelector('#delete-team-box')
+const deleteTeamBtn = document.querySelector('#delete-team')
 
 let isTeamTableVisible = false;
 let isPlayerTableVisible = false;
@@ -219,6 +222,27 @@ createTeam.addEventListener('click', () => {
             contentType: 'application/json',
             data: JSON.stringify(teamData),
             success: (data) => {
+                const table = document.createElement('table');
+                table.border = '2';
+                const headerRow = table.insertRow();
+                headerCell1 = headerRow.insertCell(0)
+                headerCell2 = headerRow.insertCell(1)
+                headerCell3 = headerRow.insertCell(2)
+                headerCell1.textContent = 'Team ID'
+                headerCell2.textContent = 'City'
+                headerCell3.textContent = 'Team Name'
+                
+                data.forEach((team) => {
+                    const row = table.insertRow();
+                    const cell1 = row.insertCell(0)
+                    const cell2 = row.insertCell(1)
+                    const cell3 = row.insertCell(2)
+                    cell1.textContent = team.id
+                    cell2.textContent = team.city
+                    cell3.textContent = team.name
+                });
+                
+                createTeamBox.append(table)
                 console.log('Team Created:', data)
             },
             error: (error) => {
@@ -283,6 +307,30 @@ createPlayer.addEventListener('click', () => {
             contentType: 'application/json',
             data: JSON.stringify(playerData),
             success: (data) => {
+                const table = document.createElement('table');
+                table.border = '2';
+                const headerRow = table.insertRow();
+                headerCell1 = headerRow.insertCell(0)
+                headerCell2 = headerRow.insertCell(1)
+                headerCell3 = headerRow.insertCell(2)
+                headerCell4 = headerRow.insertCell(3)
+                headerCell1.textContent = 'Player ID'
+                headerCell2.textContent = 'Name'
+                headerCell3.textContent = 'Age'
+                headerCell4.textContent = 'Team Id'
+
+                data.forEach((player) => {
+                    const row = table.insertRow();
+                    const cell1 = row.insertCell(0)
+                    const cell2 = row.insertCell(1)
+                    const cell3 = row.insertCell(2)
+                    const cell4 = row.insertCell(3)
+                    cell1.textContent = player.id
+                    cell2.textContent = player.name
+                    cell3.textContent = player.age
+                    cell4.textContent = player.team_id
+                })
+                createPlayerBox.append(table)
                 console.log('Player Created:', data)
             },
             error: (error) => {
@@ -348,6 +396,30 @@ updatePlayerBtn.addEventListener('click', () => {
             contentType: 'application/json',
             data: JSON.stringify(playerData),
             success: (data) => {
+                const table = document.createElement('table');
+                table.border = '2';
+                const headerRow = table.insertRow();
+                headerCell1 = headerRow.insertCell(0)
+                headerCell2 = headerRow.insertCell(1)
+                headerCell3 = headerRow.insertCell(2)
+                headerCell4 = headerRow.insertCell(3)
+                headerCell1.textContent = 'Player ID'
+                headerCell2.textContent = 'Name'
+                headerCell3.textContent = 'Age'
+                headerCell4.textContent = 'Team Id'
+
+                data.forEach((player) => {
+                    const row = table.insertRow();
+                    const cell1 = row.insertCell(0)
+                    const cell2 = row.insertCell(1)
+                    const cell3 = row.insertCell(2)
+                    const cell4 = row.insertCell(3)
+                    cell1.textContent = player.id
+                    cell2.textContent = player.name
+                    cell3.textContent = player.age
+                    cell4.textContent = player.team_id
+                })
+                updatePlayer.append(table)
                 console.log('Player Edit Complete:', data)
             }
         })
@@ -397,6 +469,27 @@ updateTeamBtn.addEventListener('click', () => {
             contentType: 'application/json',
             data: JSON.stringify(teamData),
             success: (data) => {
+                const table = document.createElement('table');
+                table.border = '2';
+                const headerRow = table.insertRow();
+                headerCell1 = headerRow.insertCell(0)
+                headerCell2 = headerRow.insertCell(1)
+                headerCell3 = headerRow.insertCell(2)
+                headerCell1.textContent = 'Team ID'
+                headerCell2.textContent = 'City'
+                headerCell3.textContent = 'Team Name'
+                
+                data.forEach((team) => {
+                    const row = table.insertRow();
+                    const cell1 = row.insertCell(0)
+                    const cell2 = row.insertCell(1)
+                    const cell3 = row.insertCell(2)
+                    cell1.textContent = team.id
+                    cell2.textContent = team.city
+                    cell3.textContent = team.name
+                });
+                
+                updateTeam.append(table)
                 console.log('Team Edit Complete:', data)
             }
            
@@ -414,8 +507,67 @@ deletePlayer.addEventListener('click', () => {
         url: `http://localhost:8000/api/player/${playerIndex}`,
         type: 'DELETE',
         success: (data) => {
+            const table = document.createElement('table');
+                table.border = '2';
+                const headerRow = table.insertRow();
+                headerCell1 = headerRow.insertCell(0)
+                headerCell2 = headerRow.insertCell(1)
+                headerCell3 = headerRow.insertCell(2)
+                headerCell4 = headerRow.insertCell(3)
+                headerCell1.textContent = 'Player ID'
+                headerCell2.textContent = 'Name'
+                headerCell3.textContent = 'Age'
+                headerCell4.textContent = 'Team Id'
+
+                data.forEach((player) => {
+                    const row = table.insertRow();
+                    const cell1 = row.insertCell(0)
+                    const cell2 = row.insertCell(1)
+                    const cell3 = row.insertCell(2)
+                    const cell4 = row.insertCell(3)
+                    cell1.textContent = player.id
+                    cell2.textContent = player.name
+                    cell3.textContent = player.age
+                    cell4.textContent = player.team_id
+                })
+                deletePlayerBox.append(table)
             console.log('Team Deleted:', data)
         }
     })
    }
 })
+
+deleteTeamBtn.addEventListener('click', () => {
+    const teamIndex = parseInt(prompt(`Enter a index to delete.`))
+    console.log(teamIndex)
+    if(!isNaN(teamIndex) || teamIndex !== null) {
+     $.ajax({
+         url: `http://localhost:8000/api/team/${teamIndex}`,
+         type: 'DELETE',
+         success: (data) => {
+            const table = document.createElement('table');
+            table.border = '2';
+            const headerRow = table.insertRow();
+            headerCell1 = headerRow.insertCell(0)
+            headerCell2 = headerRow.insertCell(1)
+            headerCell3 = headerRow.insertCell(2)
+            headerCell1.textContent = 'Team ID'
+            headerCell2.textContent = 'City'
+            headerCell3.textContent = 'Team Name'
+            
+            data.forEach((team) => {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0)
+                const cell2 = row.insertCell(1)
+                const cell3 = row.insertCell(2)
+                cell1.textContent = team.id
+                cell2.textContent = team.city
+                cell3.textContent = team.name
+            });
+             deleteTeamBox.append(table)
+             console.log('Team Deleted:', data)
+         }
+     })
+    }
+ })
+ 

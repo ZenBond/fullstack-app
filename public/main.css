@@ -1,8 +1,9 @@
 body {
-    background-color: rgb(255, 247, 232);
+    background-color: rgb(221, 221, 221);
+    margin-top: 200px;
 }
 
-#get-all {
+#get-all, #create-box, #update-box, #delete-box {
     display: flex;
     border-radius: 20px;
     justify-content: space-evenly;
@@ -11,7 +12,7 @@ body {
     color: rgb(58, 58, 44);
 }
 
-.all-teams, .all-players {
+.all-teams, .all-players, #create-player, #create-team, #update-btn, #teamupdate-btn, #delete-player, #delete-team {
     background-color: rgb(255, 247, 232);
     width: 200px;
     border-radius: 20px;
