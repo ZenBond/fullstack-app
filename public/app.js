@@ -12,28 +12,148 @@ const updatePlayerBtn = document.querySelector('#update-btn')
 const updateBox = document.querySelector('#update-box')
 const updateTeamBtn = document.querySelector('#teamupdate-btn')
 const updateTeam = document.querySelector('#update-team')
+const allTeams = document.querySelector('#all-teams-box')
+const allPlayers = document.querySelector('#all-players-box')
+const playerIndexBox = document.querySelector('#player-index-box')
+const teamIndexBox = document.querySelector('#team-index-box')
 
-
+let isTeamTableVisible = false;
+let isPlayerTableVisible = false;
 const getAllTeamData = () => {
-    $.get(`http://localhost:8000/api/team`, (data) => {
-        console.log(data)
-    })
+    if (isTeamTableVisible) {
+        allTeams.innerHTML = '';
+        isTeamTableVisible = false;
+    } else {
+
+        $.get(`http://localhost:8000/api/team`, (data) => {
+            const table = document.createElement('table');
+            table.border = '2';
+            const headerRow = table.insertRow();
+            headerCell1 = headerRow.insertCell(0)
+            headerCell2 = headerRow.insertCell(1)
+            headerCell3 = headerRow.insertCell(2)
+            headerCell1.textContent = 'Team ID'
+            headerCell2.textContent = 'City'
+            headerCell3.textContent = 'Team Name'
+            
+            data.forEach((team) => {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0)
+                const cell2 = row.insertCell(1)
+                const cell3 = row.insertCell(2)
+                cell1.textContent = team.id
+                cell2.textContent = team.city
+                cell3.textContent = team.name
+            });
+            
+            allTeams.append(table)
+            isTeamTableVisible = true;
+        })
+    }
 }
 const getAllPlayerData = () => {
+    if (isPlayerTableVisible) {
+        allPlayers.innerHTML = '';
+        isPlayerTableVisible = false;
+    } else {
     $.get(`http://localhost:8000/api/player`, (data) => {
-        console.log(data)
+        const table = document.createElement('table');
+        table.border = '2';
+        const headerRow = table.insertRow();
+        headerCell1 = headerRow.insertCell(0)
+        headerCell2 = headerRow.insertCell(1)
+        headerCell3 = headerRow.insertCell(2)
+        headerCell4 = headerRow.insertCell(3)
+        headerCell1.textContent = 'Player ID'
+        headerCell2.textContent = 'Name'
+        headerCell3.textContent = 'Age'
+        headerCell4.textContent = 'Team Id'
+       
+        data.forEach((player) => {
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0)
+            const cell2 = row.insertCell(1)
+            const cell3 = row.insertCell(2)
+            const cell4 = row.insertCell(3)
+            cell1.textContent = player.id
+            cell2.textContent = player.name
+            cell3.textContent = player.age
+            cell4.textContent = player.team_id
     })
+
+    allPlayers.append(table)
+    isPlayerTableVisible = true;
+});
+}
+    
 }
 
+
 const getPlayerByIndex = () => {
+    if (isPlayerTableVisible) {
+        playerIndexBox.innerHTML = '';
+        isPlayerTableVisible = false;
+    } else {
     $.get(`http://localhost:8000/api/player/${playerIndex.value}`, (data) => {
-        console.log(data)
+        const table = document.createElement('table');
+        table.border = '2';
+        const headerRow = table.insertRow();
+        headerCell1 = headerRow.insertCell(0)
+        headerCell2 = headerRow.insertCell(1)
+        headerCell3 = headerRow.insertCell(2)
+        headerCell4 = headerRow.insertCell(3)
+        headerCell1.textContent = 'Player ID'
+        headerCell2.textContent = 'Name'
+        headerCell3.textContent = 'Age'
+        headerCell4.textContent = 'Team Id'
+       
+        data.forEach((player) => {
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0)
+            const cell2 = row.insertCell(1)
+            const cell3 = row.insertCell(2)
+            const cell4 = row.insertCell(3)
+            cell1.textContent = player.id
+            cell2.textContent = player.name
+            cell3.textContent = player.age
+            cell4.textContent = player.team_id
+    })
+
+    playerIndexBox.append(table)
+    isPlayerTableVisible = true;
     })
 }
+}
 const getTeamByIndex = () => {
+    if (isTeamTableVisible) {
+        teamIndexBox.innerHTML = '';
+        isTeamTableVisible = false;
+    } else {
     $.get(`http://localhost:8000/api/team/${teamIndex.value}`, (data) => {
-        console.log(data)
+        const table = document.createElement('table');
+        table.border = '2';
+        const headerRow = table.insertRow();
+        headerCell1 = headerRow.insertCell(0)
+        headerCell2 = headerRow.insertCell(1)
+        headerCell3 = headerRow.insertCell(2)
+        headerCell1.textContent = 'Team ID'
+        headerCell2.textContent = 'City'
+        headerCell3.textContent = 'Team Name'
+        
+        data.forEach((team) => {
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0)
+            const cell2 = row.insertCell(1)
+            const cell3 = row.insertCell(2)
+            cell1.textContent = team.id
+            cell2.textContent = team.city
+            cell3.textContent = team.name
+        });
+        
+        teamIndexBox.append(table)
+        isTeamTableVisible = true;
     })
+}
 }
 
 

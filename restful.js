@@ -130,6 +130,33 @@ app.put('/api/:endpoint/:id', async (req, res, next) => {
     }
 })
 
+app.patch('/api/:endpoint/:id', async (req, res, next) => {
+    try {
+        const {id, endpoint} = req.params;
+        const {name, age, team_id, city} = req.body;
+
+        let query;
+        let values;
+        switch (endpoint) {
+            case 'player':
+                query = `UPDATE player SET name = $1, age = $2, team_id = $3 WHERE id = $4 RETURNING *`
+                values = [name, age, team_id, id];
+                break;
+            case 'team':
+                query = `UPDATE team SET city = $1, name = $2 WHERE id = $3 RETURNING *`
+                values = [city, name, id];
+                break;
+            default:
+                res.status(404).send(`NOT FOUND 🙃`);
+                return;
+        }
+        const result = await pool.query(query, values);
+        res.status(200).json(result.rows)
+    } catch(err) {
+        next(err)
+    }
+})
+
 app.delete('/api/:endpoint/:id', async (req, res, next) => {
     try {
         const { id, endpoint } = req.params;

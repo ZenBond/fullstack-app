@@ -9,15 +9,23 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <div>
+    <div id="get-all">
       <button class="all-teams">All Teams</button>
+      <div id="all-teams-box"></div>
       <button class="all-players">All Players</button>
+      <div id="all-players-box"></div>
     </div>
-    <div>
-      <label for="player-index">Select Player By Index</label>
-      <input type="number" name="player" id="player-index" />
-      <label for="team-index">Select Team By Index</label>
-      <input type="number" name="team" id="team-index" />
+    <div id="index-box">
+      <div>
+        <label for="player-index">Select Player By Index</label>
+        <input type="number" name="player" id="player-index" />
+        <div id="player-index-box"></div>
+      </div>
+      <div>
+        <label for="team-index">Select Team By Index</label>
+        <input type="number" name="team" id="team-index" />
+        <div id="team-index-box"></div>
+      </div>
     </div>
     <div>
       <div id="create-player-box">

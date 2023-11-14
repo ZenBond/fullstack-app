@@ -1,0 +1,37 @@
+body {
+    background-color: rgb(255, 247, 232);
+}
+
+#get-all {
+    display: flex;
+    border-radius: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px;
+    color: rgb(58, 58, 44);
+}
+
+.all-teams, .all-players {
+    background-color: rgb(255, 247, 232);
+    width: 200px;
+    border-radius: 20px;
+    border: 1px solid rgb(58, 58, 44);
+    cursor: pointer;
+}
+
+#index-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px;
+    margin-left: -180px;
+}
+
+table {
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px, solid, rgb(58, 58, 44);
+    text-align: left;
+    padding: 8px;
+}
