@@ -4,7 +4,7 @@ import pg from 'pg';
 const PORT = 8000;
 
 app.use(express.json());
-
+app.use(express.static('public'));
 
 const { Pool } = pg;
 const pool = new Pool ({

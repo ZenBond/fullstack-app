@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div>
+      <button class="all-teams">All Teams</button>
+      <button class="all-players">All Players</button>
+    </div>
+    <div>
+      <label for="player-index">Select Player By Index</label>
+      <input type="number" name="player" id="player-index" />
+      <label for="team-index">Select Team By Index</label>
+      <input type="number" name="team" id="team-index" />
+    </div>
+    <div>
+      <div id="create-player-box">
+        <button id="create-player">Create Player</button>
+      </div>
+      <div id="create-team-box">
+        <button id="create-team">Create Team</button>
+      </div>
+    </div>
+    <div id="delete-box">
+      <button id="delete-player">Delete Player</button>
+    </div>
+    <script defer src="app.js"></script>
+  </body>
+</html>
