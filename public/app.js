@@ -7,6 +7,11 @@ const createPlayer = document.querySelector('#create-player')
 const createPlayerBox = document.querySelector('#create-player-box')
 const createTeamBox = document.querySelector('#create-team-box')
 const deletePlayer = document.querySelector('#delete-player')
+const updatePlayer = document.querySelector('#update-player')
+const updatePlayerBtn = document.querySelector('#update-btn')
+const updateBox = document.querySelector('#update-box')
+const updateTeamBtn = document.querySelector('#teamupdate-btn')
+const updateTeam = document.querySelector('#update-team')
 
 
 const getAllTeamData = () => {
@@ -31,15 +36,7 @@ const getTeamByIndex = () => {
     })
 }
 
-// const deletePlayerByIndex = (playerIndex) => {
-//     $.ajax({
-//         url: `http://localhost:8000/api/player/${playerIndex}`,
-//         type: 'DELETE',
-//         success: (data) => {
-//             console.log('Team Deleted:', data)
-//         }
-//     })
-// }
+
 
 //GET ALL ROUTES
 teamBtn.addEventListener('click', () => {
@@ -176,6 +173,116 @@ createPlayer.addEventListener('click', () => {
     })
 
     
+})
+
+//Update Player
+updatePlayerBtn.addEventListener('click', () => {
+    const playerIndex = prompt(`Enter the id of the player you want to edit.`)
+    const input1 = document.createElement('input');
+    input1.type = 'text'
+    input1.placeholder = 'Enter New Name'
+    const input2 = document.createElement('input');
+    input2.type = 'text'
+    input2.placeholder = 'Enter New Age'
+    const input3 = document.createElement('input');
+    input3.type = 'text'
+    input3.placeholder = 'Enter New Team ID'
+    const submit = document.createElement('button')
+    submit.innerHTML = 'Submit'
+    updatePlayer.append(input1)
+    updatePlayer.append(input2)
+    updatePlayer.append(input3)
+    updatePlayer.append(submit)
+    const playerData = {
+        name: '',
+        age: '',
+        team_id: ''
+    }
+
+    input1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            playerData.name = input1.value
+            console.log(playerData.name)
+        }
+    })
+    input2.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            playerData.age = input2.value
+            console.log(playerData.age)
+        }
+    })
+    input3.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            playerData.team_id = input3.value
+            console.log(playerData.team_id)
+        }
+    })
+
+    submit.addEventListener('click', () => {
+        console.log(JSON.stringify(playerData))
+        
+    
+        $.ajax({
+            url: `http://localhost:8000/api/player/${playerIndex}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(playerData),
+            success: (data) => {
+                console.log('Player Edit Complete:', data)
+            }
+        })
+
+    })
+})
+
+//Update Team
+updateTeamBtn.addEventListener('click', () => {
+    const teamIndex = prompt(`Enter the id of the team you want to edit.`)
+    const input1 = document.createElement('input');
+    input1.type = 'text'
+    input1.placeholder = 'Enter New City'
+    const input2 = document.createElement('input');
+    input2.type = 'text'
+    input2.placeholder = 'Enter New Team Name'
+    const submit = document.createElement('button')
+    submit.innerHTML = 'Submit'
+    updateTeam.append(input1)
+    updateTeam.append(input2)
+    updateTeam.append(submit)
+    const teamData = {
+        city: '',
+        name: '',
+    }
+
+    input1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            teamData.city = input1.value
+            console.log(teamData.city)
+        }
+    })
+    input2.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            teamData.name = input2.value
+            console.log(teamData.name)
+        }
+    })
+
+    submit.addEventListener('click', () => {
+        console.log(JSON.stringify(teamData))
+        
+    
+        $.ajax({
+            url: `http://localhost:8000/api/team/${teamIndex}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(teamData),
+            success: (data) => {
+                console.log('Team Edit Complete:', data)
+            }
+           
+        })
+
+    })
 })
 
 //DELETE ROUTE
